@@ -8,12 +8,14 @@ import { OnInit } from '@angular/core';
   selector: 'app-root',
   template: `
   <div class="container">
-  <h1>Our Bar</h1>
-  <h2>Our Beers</h2>
+  <h1>Big Bar of Big Beers</h1>
+  <h2>Big Beers</h2>
   <ul>
     <li *ngFor="let keg of kegs" [class.selected]="keg === selectedKeg" (click)="onSelect(keg)">{{keg.name}}</li>
   </ul>
-  <keg-display [keg]="selectedKeg"></keg-display>
+  <keg-display [keg]="selectedKeg" (clickSender)="editKeg($event)"></keg-display>
+  <hr>
+  <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
   </div>
   `,
   providers: [KegService]
@@ -22,6 +24,15 @@ import { OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   kegs: Keg[];
   selectedKeg: Keg;
+
+  // selectedKeg = null;
+  editKeg(clickedKeg) {
+    this.selectedKeg = clickedKeg;
+  }
+
+  finishedEditing() {
+    this.selectedKeg = null;
+  }
 
   constructor(private kegService: KegService) { }
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Keg } from './keg';
 
 
@@ -8,7 +8,7 @@ import { Keg } from './keg';
   selector: 'keg-display',
   template: `
     <div *ngIf="keg">
-    <h4>{{keg.name}}</h4>
+    <h4>{{keg.name}}<button (click)="editButtonHasBeenClicked(currentKeg)">Edit!!!</button></h4>
       <ul>
         <li>{{keg.brand}}</li>
         <li>{{keg.price}}</li>
@@ -21,14 +21,23 @@ import { Keg } from './keg';
 export class KegDisplayComponent {
   @Input()
   keg: Keg;
+  @Output() clickSender = new EventEmitter();
+
+  editButtonHasBeenClicked(kegToEdit: Keg) {
+    this.clickSender.emit(kegToEdit);
+  }
 }
 
 
-// <ul>
-//   <li>BRAND</li>
-//   <li *ngFor="let keg of kegs">{{keg.brand}}</li>
-//   <li>PRICE</li>
-//   <li *ngFor="let keg of kegs">{{keg.price}}</li>
-//   <li>ALCOHOL CONTENT</li>
-//   <li *ngFor="let keg of kegs">{{keg.alcoholContent}}</li>
-// </ul>
+
+// priceColor(keg.price){
+//   if (keg.price > 70){
+//     return "bg-danger";
+//   } else if (keg.price <= 70 && keg.price > 50) {
+//     return "bg-warning";
+//   } else if (keg.price <= 50 && keg.price > 30) {
+//     return "bg-success";
+//   } else {
+//     return "bg-info";
+//   }
+// }
