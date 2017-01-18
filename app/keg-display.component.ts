@@ -8,8 +8,11 @@ import { Keg } from './keg';
   selector: 'keg-display',
   template: `
     <div *ngIf="keg">
+    <h4>{{keg.name}}</h4>
       <ul>
-        <li *ngFor="let keg of kegs">{{keg.name}}</li>
+        <li>{{keg.brand}}</li>
+        <li>{{keg.price}}</li>
+        <li>{{keg.alcoholContent}}</li>
       </ul>
     </div>
   `
