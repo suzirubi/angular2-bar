@@ -7,7 +7,7 @@ import { Keg } from './keg';
 @Component({
   selector: 'keg-display',
   template: `
-    <div *ngIf="keg">
+    <div>
     <h4>{{keg.name}}<button (click)="editButtonHasBeenClicked(currentKeg)">Edit!!!</button></h4>
       <ul>
         <li>{{keg.brand}}</li>
@@ -20,7 +20,7 @@ import { Keg } from './keg';
 
 export class KegDisplayComponent {
   @Input()
-  keg: Keg;
+  keg: Keg[];
   @Output() clickSender = new EventEmitter();
 
   editButtonHasBeenClicked(kegToEdit: Keg) {

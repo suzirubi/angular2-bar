@@ -13,7 +13,9 @@ import { OnInit } from '@angular/core';
   <ul>
     <li *ngFor="let keg of kegs" [class.selected]="keg === selectedKeg" (click)="onSelect(keg)">{{keg.name}}</li>
   </ul>
+  <div  *ngIf="keg">
   <keg-display [keg]="selectedKeg" (clickSender)="editKeg($event)"></keg-display>
+  </div>
   <hr>
   <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
   </div>
@@ -25,7 +27,6 @@ export class AppComponent implements OnInit {
   kegs: Keg[];
   selectedKeg: Keg;
 
-  // selectedKeg = null;
   editKeg(clickedKeg) {
     this.selectedKeg = clickedKeg;
   }
