@@ -10,6 +10,7 @@ import { OnInit } from '@angular/core';
   <div class="container">
   <h1>Big Bar of Big Beers</h1>
   <h2>Big Beers</h2>
+  <new-keg (newKegSender)="addKeg($event)"><button (click)="newButtonHasBeenClicked()">New</button></new-keg>
   <ul>
     <li *ngFor="let keg of kegs" [class.selected]="keg === selectedKeg" (click)="onSelect(keg)">{{keg.name}}</li>
   </ul>
@@ -47,6 +48,9 @@ export class AppComponent implements OnInit {
 
   onSelect(keg: Keg): void {
     this.selectedKeg = keg;
+  }
+  addKeg(newKegfromChild: Keg) {
+    this.KegService.push(newKegfromChild);
   }
 
 }
